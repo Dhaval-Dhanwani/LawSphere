@@ -1,0 +1,319 @@
+/* RoleDashboard Styles */
+
+.role-dashboard-container {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Header Section */
+.role-dashboard-header {
+  text-align: center;
+  max-width: 640px;
+  margin-bottom: 40px;
+}
+
+.role-dashboard-pill {
+  display: inline-block;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body.light-body .role-dashboard-pill {
+  background: rgba(24, 30, 75, 0.08);
+  color: #1e293b;
+  border: 1px solid rgba(30, 41, 59, 0.15);
+}
+
+.role-dashboard-title {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 12px 0;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+}
+
+body.light-body .role-dashboard-title {
+  color: #0f172a;
+}
+
+.role-dashboard-subtitle {
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0;
+}
+
+body.light-body .role-dashboard-subtitle {
+  color: #475569;
+}
+
+/* 3 Role Buttons Grid */
+.role-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 880px) {
+  .role-dashboard-grid {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+  }
+}
+
+/* Individual Role Button Card */
+.role-card-button {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: inherit;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+}
+
+.role-card-button:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
+}
+
+.role-card-button:focus-visible {
+  outline: 3px solid #f97316;
+  outline-offset: 3px;
+}
+
+/* Light Theme overrides for Role Button */
+body.light-body .role-card-button {
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  color: #1e293b;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+body.light-body .role-card-button:hover {
+  border-color: #3b82f6;
+  background: #f8fafc;
+  box-shadow: 0 16px 30px rgba(59, 130, 246, 0.12);
+}
+
+/* Selected State */
+.role-card-button.selected {
+  border-color: #f97316;
+  background: rgba(249, 115, 22, 0.18);
+  box-shadow: 0 0 0 1px #f97316, 0 12px 28px rgba(249, 115, 22, 0.35);
+}
+
+body.light-body .role-card-button.selected {
+  border-color: #2563eb;
+  background: #eff6ff;
+  box-shadow: 0 0 0 1px #2563eb, 0 12px 28px rgba(37, 99, 235, 0.18);
+}
+
+/* Top bar inside card: Icon + Badge */
+.role-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.role-icon-wrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.12);
+  color: #f97316;
+  transition: transform 0.25s ease;
+}
+
+.role-card-button:hover .role-icon-wrapper {
+  transform: scale(1.08);
+}
+
+body.light-body .role-icon-wrapper {
+  background: #eef2ff;
+  color: #2563eb;
+}
+
+.role-card-button.selected .role-icon-wrapper {
+  background: #f97316;
+  color: #ffffff;
+}
+
+body.light-body .role-card-button.selected .role-icon-wrapper {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.role-badge {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+body.light-body .role-badge {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.role-card-button.selected .role-badge {
+  background: rgba(249, 115, 22, 0.3);
+  color: #ffedd5;
+}
+
+body.light-body .role-card-button.selected .role-badge {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+/* Titles and Descriptions */
+.role-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  color: #ffffff;
+}
+
+body.light-body .role-title {
+  color: #0f172a;
+}
+
+.role-description {
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 24px 0;
+  flex-grow: 1;
+}
+
+body.light-body .role-description {
+  color: #64748b;
+}
+
+/* Action Indicator */
+.role-action-indicator {
+  font-size: 14px;
+  font-weight: 600;
+  color: #f97316;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.2s ease;
+}
+
+.role-card-button:hover .role-action-indicator {
+  gap: 10px;
+}
+
+body.light-body .role-action-indicator {
+  color: #2563eb;
+}
+
+.role-card-button.selected .role-action-indicator {
+  color: #fed7aa;
+}
+
+body.light-body .role-card-button.selected .role-action-indicator {
+  color: #1d4ed8;
+}
+
+/* Bottom Selection Notification Box */
+.role-selection-status {
+  margin-top: 36px;
+  padding: 14px 28px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 15px;
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+body.light-body .role-selection-status {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #1e293b;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.role-selection-status p {
+  margin: 0;
+}
+
+.proceed-btn {
+  background: #f97316;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.proceed-btn:hover {
+  background: #ea580c;
+}
+
+body.light-body .proceed-btn {
+  background: #2563eb;
+}
+
+body.light-body .proceed-btn:hover {
+  background: #1d4ed8;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

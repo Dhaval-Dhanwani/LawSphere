@@ -1,0 +1,168 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar-Light */
+.lightnavbox {
+  width: 100%;
+  height: 90px;
+  background-color: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 30px;
+}
+
+body.light-body {
+  background-color: #f8fafc;
+  color: #0f172a;
+  font-family: Arial, sans-serif;
+}
+
+/* Navbar-Dark */
+.darknavbox {
+  width: 100%;
+  height: 90px;
+  background-color: #1e1b4b;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 30px;
+}
+
+body.dark-body {
+  background-color: #0f172a;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+/* Left side: logo + LawSphere */
+#company-logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: white;
+}
+
+/* Center About + Home */
+.info {
+  background-color: transparent;
+  color: inherit;
+  border: 1px solid transparent;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 0 4px;
+}
+
+.info:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.light-body .info:hover {
+  background-color: #e2e8f0;
+}
+
+/* Right side actions */
+.nav-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.signup-nav-btn {
+  background: #f97316;
+  color: #ffffff;
+  border: none;
+  padding: 9px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
+}
+
+.signup-nav-btn:hover {
+  background: #ea580c;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+}
+
+body.light-body .signup-nav-btn {
+  background: #2563eb;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+}
+
+body.light-body .signup-nav-btn:hover {
+  background: #1d4ed8;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+}
+
+/* Sign Out Button in Nav */
+.signout-nav-btn {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.signout-nav-btn:hover {
+  background: rgba(239, 68, 68, 0.4);
+  color: #ffffff;
+  border-color: #ef4444;
+}
+
+body.light-body .signout-nav-btn {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+}
+
+body.light-body .signout-nav-btn:hover {
+  background: #fecaca;
+  color: #b91c1c;
+}
+
+.theme-nav-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.theme-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+body.light-body .theme-nav-btn {
+  background: #ffffff;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+}
+
+body.light-body .theme-nav-btn:hover {
+  background: #f1f5f9;
+}
