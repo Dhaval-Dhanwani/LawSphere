@@ -11,6 +11,7 @@ import ClientDashboard from '../components/ClientDashboard';
 import LawfirmDashboard from '../components/LawfirmDashboard';
 import LawyerDashboard from '../components/LawyerDashboard';
 import PlainPage from '../components/PlainPage';
+import ProfilePage from '../components/ProfilePage';
 
 function App() {
   const [currentView, setCurrentView] = useState('dashboard');
@@ -62,6 +63,17 @@ function App() {
 
         {/* Lawyer Dashboard: Can see list of Law Firms */}
         {currentView === 'lawyer-dashboard' && <LawyerDashboard onNavigate={navigateTo} />}
+
+        {/* Role-Specific Profile Pages */}
+        {currentView === 'client-profile' && (
+          <ProfilePage role="client" onBack={() => navigateTo('client-dashboard')} />
+        )}
+        {currentView === 'lawfirm-profile' && (
+          <ProfilePage role="lawfirm" onBack={() => navigateTo('lawfirm-dashboard')} />
+        )}
+        {currentView === 'lawyer-profile' && (
+          <ProfilePage role="lawyer" onBack={() => navigateTo('lawyer-dashboard')} />
+        )}
 
         {/* Test Plain White Page */}
         {currentView === 'plain-page' && (

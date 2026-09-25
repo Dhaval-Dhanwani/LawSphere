@@ -45,7 +45,8 @@ function SignUp({ onNavigate }) {
       console.log('Status:', e.response?.status);
       console.log('Backend response:', e.response?.data);
 
-      onNavigate('Signup');
+      const errorMsg = e.response?.data?.error || 'Authentication failed. Please check your email, password, and selected role.';
+      alert(errorMsg);
     });
   };
 

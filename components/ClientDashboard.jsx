@@ -6,28 +6,36 @@ import userAvatar from '../src/assets/images/user-avatar.png';
 function ClientDashboard({ onNavigate }) {
   const [activeTab, setActiveTab] = useState('lawyers');
 
-  // Placeholder states for backend data
   const [lawyers, setLawyers] = useState([]);
   const [lawfirms, setLawfirms] = useState([]);
 
-  // Fetch data from Express backend here when ready
   useEffect(() => {
     // Fetch Lawyers
     axios.get("http://localhost:3000/clients/ListLawyers")
       .then((response) => {
-        console.log("Lawyers:", response.data);
-        setLawyers(response.data);
+        if (response.data && Array.isArray(response.data)) {
+          setLawyers(response.data);
+        } else {
+          setLawyers([]);
+        }
       })
-      .catch((error) => console.log("Error fetching lawyers:", error));
+      .catch((error) => {
+        console.log("Error fetching lawyers:", error);
+        setLawyers([]);
+      });
 
     // Fetch Law Firms
     axios.get("http://localhost:3000/clients/ListLawfirms")
       .then((response) => {
-        console.log("Law firms:", response.data);
-        setLawfirms(response.data);
+        if (response.data && Array.isArray(response.data)) {
+          setLawfirms(response.data);
+        } else {
+          setLawfirms([]);
+        }
       })
       .catch((err) => {
         console.log("Error fetching law firms:", err);
+        setLawfirms([]);
       });
   }, []);
 
@@ -36,7 +44,12 @@ function ClientDashboard({ onNavigate }) {
       {/* Top action bar with Profile button */}
       <div className="dashboard-top-bar">
         <span className="dashboard-portal-tag">Client Portal</span>
-        <button className="dashboard-profile-btn" title="Profile" aria-label="Profile">
+        <button
+          className="dashboard-profile-btn"
+          title="Profile"
+          aria-label="Profile"
+          onClick={() => onNavigate && onNavigate('client-profile')}
+        >
           <img src={userAvatar} alt="Profile" className="dashboard-profile-img" />
         </button>
       </div>
@@ -63,43 +76,75 @@ function ClientDashboard({ onNavigate }) {
 
       <div className="dashboard-list">
         {activeTab === 'lawyers' && (
-          lawyers.map((lawyer) => (
-            <div
-              key={lawyer._id}
-              className="list-item-card"
-              onClick={() => onNavigate('plain-page')}
-            >
-              <div className="item-top-row">
-                <h3 className="item-title">{lawyer.name}</h3>
-                <span className="item-badge">{lawyer.experience || 'Advocate'}</span>
+          lawyers.length > 0 ? (
+            lawyers.map((lawyer) => (
+              <div
+                key={lawyer._id}
+                className="list-item-card"
+                onClick={() => onNavigate('plain-page')}
+              >
+                <div className="item-top-row">
+                  <h3 className="item-title">{lawyer.name}</h3>
+                  <span className="item-badge">{lawyer.experience || 'Advocate'}</span>
+                </div>
+                <p className="item-subtitle">
+                  <strong>Practice:</strong> {lawyer.praticeAreas || lawyer.practiceAreas || 'General Practice'} &nbsp;|&nbsp; 
+                  <strong>Location:</strong> {lawyer.Location || lawyer.location || 'Pan India'}
+                </p>
+                {lawyer.education && (
+                  <p className="item-details">
+                    <strong>Education:</strong> {lawyer.education}
+                  </p>
+                )}
+                {lawyer.skills && (
+                  <p className="item-details">
+                    <strong>Skills:</strong> {lawyer.skills}
+                  </p>
+                )}
+                <span className="click-hint">Click to view details &rarr;</span>
               </div>
-              <p className="item-subtitle">
-                <strong>Practice:</strong> {lawyer.praticeAreas || lawyer.practiceAreas || 'General Practice'} &nbsp;|&nbsp; 
-                <strong>Location:</strong> {lawyer.Location || lawyer.location || 'Pan India'}
-              </p>
-              <span className="click-hint">Click to view details &rarr;</span>
+            ))
+          ) : (
+            <div className="dashboard-empty">
+              <p>data is not avaliable</p>
             </div>
-          ))
+          )
         )}
 
         {activeTab === 'lawfirms' && (
-          lawfirms.map((firm) => (
-            <div
-              key={firm._id}
-              className="list-item-card"
-              onClick={() => onNavigate('plain-page')}
-            >
-              <div className="item-top-row">
-                <h3 className="item-title">{firm.firmName}</h3>
-                <span className="item-badge">Law Firm</span>
+          lawfirms.length > 0 ? (
+            lawfirms.map((firm) => (
+              <div
+                key={firm._id}
+                className="list-item-card"
+                onClick={() => onNavigate('plain-page')}
+              >
+                <div className="item-top-row">
+                  <h3 className="item-title">{firm.firmName}</h3>
+                  <span className="item-badge">Law Firm</span>
+                </div>
+                <p className="item-subtitle">
+                  <strong>Practice:</strong> {firm.practicesAreas || 'Corporate / Litigation'} &nbsp;|&nbsp; 
+                  <strong>Offices:</strong> {firm.officeLocations || 'Multiple Locations'}
+                </p>
+                {firm.website && (
+                  <p className="item-details">
+                    <strong>Website:</strong> {firm.website} &nbsp;|&nbsp; <strong>Contact:</strong> {firm.contactEmail || 'N/A'}
+                  </p>
+                )}
+                {firm.desription && (
+                  <p className="item-details">
+                    {firm.desription}
+                  </p>
+                )}
+                <span className="click-hint">Click to view details &rarr;</span>
               </div>
-              <p className="item-subtitle">
-                <strong>Practice:</strong> {firm.practicesAreas || 'Corporate / Litigation'} &nbsp;|&nbsp; 
-                <strong>Offices:</strong> {firm.officeLocations || 'Multiple Locations'}
-              </p>
-              <span className="click-hint">Click to view details &rarr;</span>
+            ))
+          ) : (
+            <div className="dashboard-empty">
+              <p>data is not avaliable</p>
             </div>
-          ))
+          )
         )}
       </div>
     </div>

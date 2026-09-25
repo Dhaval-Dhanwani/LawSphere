@@ -8,60 +8,19 @@ function LawfirmDashboard({ onNavigate }) {
 
   // Promise settle state is decide on status code given be controller
   useEffect(() => {
-    // Fetch lawyers from backend if available, fallback to initial mock data for testing
+    // Fetch lawyers from backend database
     axios.get("http://localhost:3000/lawfirm/ListLawyers")
       .then((response) => {
-        if (response.data && response.data.length > 0) {
+        if (response.data && Array.isArray(response.data)) {
           setLawyers(response.data);
         } else {
-          setMockData();
+          setLawyers([]);
         }
       })
       .catch((error) => {
-        console.log("Using mock data for lawyers:", error);
-        setMockData();
+        console.log("Error fetching lawyers:", error);
+        setLawyers([]);
       });
-
-    function setMockData() {
-      setLawyers([
-        {
-          _id: '1',
-          name: 'Adv. Harish Salve',
-          praticeAreas: 'Constitutional & Commercial Litigation',
-          Location: 'New Delhi',
-          experience: '30+ Years',
-          education: 'LL.B. Nagpur University',
-          skills: 'Arbitration, Corporate Defense, Supreme Court Litigation'
-        },
-        {
-          _id: '2',
-          name: 'Adv. Mukul Rohatgi',
-          praticeAreas: 'Corporate, Criminal & Taxation Law',
-          Location: 'Mumbai',
-          experience: '28 Years',
-          education: 'Government Law College, Mumbai',
-          skills: 'Cross-border M&A, High Court Appellate'
-        },
-        {
-          _id: '3',
-          name: 'Adv. Indira Jaising',
-          praticeAreas: 'Human Rights, Constitutional & Civil Law',
-          Location: 'New Delhi',
-          experience: '35+ Years',
-          education: 'University of Bombay',
-          skills: 'Public Interest Litigation, Gender Rights'
-        },
-        {
-          _id: '4',
-          name: 'Adv. Abhishek Manu Singhvi',
-          praticeAreas: 'Corporate Governance & Constitutional Disputes',
-          Location: 'New Delhi',
-          experience: '25 Years',
-          education: 'Cambridge & Harvard Law',
-          skills: 'Commercial Arbitration, Regulatory Law'
-        }
-      ]);
-    }
   }, []);
 
   return (
@@ -69,7 +28,12 @@ function LawfirmDashboard({ onNavigate }) {
       {/* Top action bar with Profile button */}
       <div className="dashboard-top-bar">
         <span className="dashboard-portal-tag">Law Firm Portal</span>
-        <button className="dashboard-profile-btn" title="Profile" aria-label="Profile">
+        <button
+          className="dashboard-profile-btn"
+          title="Profile"
+          aria-label="Profile"
+          onClick={() => onNavigate && onNavigate('lawfirm-profile')}
+        >
           <img src={userAvatar} alt="Profile" className="dashboard-profile-img" />
         </button>
       </div>
@@ -110,7 +74,7 @@ function LawfirmDashboard({ onNavigate }) {
           ))
         ) : (
           <div className="dashboard-empty">
-            <p>No lawyers found at the moment.</p>
+            <p>data is not avaliable</p>
           </div>
         )}
       </div>

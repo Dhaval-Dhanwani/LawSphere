@@ -27,7 +27,10 @@ function Navbar({ onNavigate, currentView }) {
     const isDashboardPage =
         currentView === 'client-dashboard' ||
         currentView === 'lawfirm-dashboard' ||
-        currentView === 'lawyer-dashboard';
+        currentView === 'lawyer-dashboard' ||
+        currentView === 'client-profile' ||
+        currentView === 'lawfirm-profile' ||
+        currentView === 'lawyer-profile';
 
     return (
         <div className={currstate === "dark" ? "darknavbox" : "lightnavbox"}>
