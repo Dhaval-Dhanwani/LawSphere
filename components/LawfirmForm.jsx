@@ -11,7 +11,9 @@ function LawfirmForm({ onBack, onSuccess }) {
 
       let lawfirmdata= Object.fromEntries(formdata.entries())
 
-      const response=await axios.post('http://localhost:3000/lawfirm/register',lawfirmdata);
+      const response = await axios.post('http://localhost:3000/lawfirm/register', lawfirmdata, {
+        withCredentials: true
+      });
 
       console.log(response.data)
 

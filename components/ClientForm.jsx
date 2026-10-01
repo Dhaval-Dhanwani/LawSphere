@@ -14,7 +14,9 @@ function ClientForm({ onBack, onSuccess }) {
 
     try{
       // converted to JSON by axios itself
-      const response = await axios.post("http://localhost:3000/clients/register", cliententries);
+      const response = await axios.post("http://localhost:3000/clients/register", cliententries, {
+        withCredentials: true
+      });
       
       if (response.status === 200 || response.status === 201) {
         console.log("Success:", response.data);

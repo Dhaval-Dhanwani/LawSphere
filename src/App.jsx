@@ -11,7 +11,9 @@ import ClientDashboard from '../components/ClientDashboard';
 import LawfirmDashboard from '../components/LawfirmDashboard';
 import LawyerDashboard from '../components/LawyerDashboard';
 import PlainPage from '../components/PlainPage';
-import ProfilePage from '../components/ProfilePage';
+import ClientProfilePage from '../components/ClientProfilePage';
+import LawfirmProfilePage from '../components/LawfirmProfilePage';
+import LawyerProfilePage from '../components/LawyerProfilePage';
 
 function App() {
   const [currentView, setCurrentView] = useState('dashboard');
@@ -66,13 +68,13 @@ function App() {
 
         {/* Role-Specific Profile Pages */}
         {currentView === 'client-profile' && (
-          <ProfilePage role="client" onBack={() => navigateTo('client-dashboard')} />
+          <ClientProfilePage onBack={() => navigateTo('client-dashboard')} />
         )}
         {currentView === 'lawfirm-profile' && (
-          <ProfilePage role="lawfirm" onBack={() => navigateTo('lawfirm-dashboard')} />
+          <LawfirmProfilePage onBack={() => navigateTo('lawfirm-dashboard')} />
         )}
         {currentView === 'lawyer-profile' && (
-          <ProfilePage role="lawyer" onBack={() => navigateTo('lawyer-dashboard')} />
+          <LawyerProfilePage onBack={() => navigateTo('lawyer-dashboard')} />
         )}
 
         {/* Test Plain White Page */}

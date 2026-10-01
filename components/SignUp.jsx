@@ -17,17 +17,17 @@ function SignUp({ onNavigate }) {
 
     // Add selected role
     data.role = selectedRole;
-
-    console.log('Data being sent:', data);
-    console.log('Axios request is sent');
+    console.log('Authenticating with data:', data);
 
     axios.post(
       "http://localhost:3000/SignUp/Authenticate",
-      data
+      data,
+      {
+        withCredentials: true
+      }
     )
     .then((response) => {
-      console.log("I am resolved");
-      console.log("Backend response:", response.data);
+      console.log("Authentication successful:", response.data);
 
       // Direct based on selected role
       if (selectedRole === 'Clients') {
@@ -41,11 +41,8 @@ function SignUp({ onNavigate }) {
       }
     })
     .catch((e) => {
-      console.log('Axios reject is sent');
-      console.log('Status:', e.response?.status);
-      console.log('Backend response:', e.response?.data);
-
-      const errorMsg = e.response?.data?.error || 'Authentication failed. Please check your email, password, and selected role.';
+      console.error('Authentication failed:', e);
+      const errorMsg = e.response?.data?.error || e.response?.data?.message || 'Authentication failed. Please check your email, password, and selected role.';
       alert(errorMsg);
     });
   };

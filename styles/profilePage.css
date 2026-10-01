@@ -309,6 +309,30 @@ body.light-body .profile-save-alert {
   color: #15803d;
 }
 
+.profile-save-alert.alert-error {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.5);
+  color: #fca5a5;
+}
+
+body.light-body .profile-save-alert.alert-error {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #b91c1c;
+}
+
+.profile-save-alert.alert-info {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.5);
+  color: #93c5fd;
+}
+
+body.light-body .profile-save-alert.alert-info {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

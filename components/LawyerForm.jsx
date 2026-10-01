@@ -12,7 +12,9 @@ function LawyerForm({ onBack, onSuccess }) {
       let fordata=new FormData(form)
       let lawyerentries=Object.fromEntries(fordata.entries())
 
-      let respone=await axios.post('http://localhost:3000/lawyers/register',lawyerentries)
+      let respone=await axios.post('http://localhost:3000/lawyers/register', lawyerentries, {
+        withCredentials: true
+      });
 
       if(respone.status==200 || respone.status==201)
       {

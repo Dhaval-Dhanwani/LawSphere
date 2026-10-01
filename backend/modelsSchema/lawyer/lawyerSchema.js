@@ -1,5 +1,4 @@
-import mongo from 'mongoose'
-import {User} from '../UserGeneric/userSchema.js'
+import mongo from 'mongoose';
 
 let lawyerSchema=mongo.Schema(
     {
