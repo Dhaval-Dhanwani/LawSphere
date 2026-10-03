@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
 
 import Navbar from '../components/Navbar';
@@ -10,18 +11,40 @@ import LawfirmForm from '../components/LawfirmForm';
 import ClientDashboard from '../components/ClientDashboard';
 import LawfirmDashboard from '../components/LawfirmDashboard';
 import LawyerDashboard from '../components/LawyerDashboard';
-import PlainPage from '../components/PlainPage';
+import BigPicture from '../components/BigPicture';
 import ClientProfilePage from '../components/ClientProfilePage';
 import LawfirmProfilePage from '../components/LawfirmProfilePage';
 import LawyerProfilePage from '../components/LawyerProfilePage';
+import ClientAppointments from '../components/ClientAppointments';
+import LawyerAppointments from '../components/LawyerAppointments';
+import LawfirmAppointments from '../components/LawfirmAppointments';
+import JobPostingForm from '../components/JobPostingForm';
+import JobsPage from '../components/JobsPage';
 
 function App() {
   const [currentView, setCurrentView] = useState('dashboard');
   const [previousDashboard, setPreviousDashboard] = useState('dashboard');
+  const [selectedEntity, setSelectedEntity] = useState(null);
+  const [userRole, setUserRole] = useState(() => localStorage.getItem('userRole') || '');
 
-  const navigateTo = (view) => {
-    if (view === 'plain-page') {
+  // Check active session on mount
+  useEffect(() => {
+    axios.get('http://localhost:3000/SignUp/currentUser', { withCredentials: true })
+      .then((res) => {
+        if (res.data?.user?.role) {
+          setUserRole(res.data.user.role);
+          localStorage.setItem('userRole', res.data.user.role);
+        }
+      })
+      .catch(() => {
+        // No active session or unauthenticated
+      });
+  }, []);
+
+  const navigateTo = (view, item = null) => {
+    if (view === 'plain-page' || view === 'big-picture') {
       setPreviousDashboard(currentView);
+      setSelectedEntity(item || null);
     }
     setCurrentView(view);
   };
@@ -34,25 +57,39 @@ function App() {
         {currentView === 'dashboard' && <RoleDashboard onProceed={navigateTo} />}
 
         {/* Sign Up Page */}
-        {currentView === 'signup' && <SignUp onNavigate={navigateTo} />}
+        {currentView === 'signup' && (
+          <SignUp
+            onNavigate={navigateTo}
+            onRoleSet={(role) => setUserRole(role)}
+          />
+        )}
 
         {/* Role Registration Forms */}
         {currentView === 'clients' && (
           <ClientForm
             onBack={() => navigateTo('dashboard')}
-            onSuccess={() => navigateTo('client-dashboard')}
+            onSuccess={() => {
+              setUserRole('Clients');
+              navigateTo('client-dashboard');
+            }}
           />
         )}
         {currentView === 'lawfirm' && (
           <LawfirmForm
             onBack={() => navigateTo('dashboard')}
-            onSuccess={() => navigateTo('lawfirm-dashboard')}
+            onSuccess={() => {
+              setUserRole('Lawfirm');
+              navigateTo('lawfirm-dashboard');
+            }}
           />
         )}
         {currentView === 'lawyer' && (
           <LawyerForm
             onBack={() => navigateTo('dashboard')}
-            onSuccess={() => navigateTo('lawyer-dashboard')}
+            onSuccess={() => {
+              setUserRole('Lawyer');
+              navigateTo('lawyer-dashboard');
+            }}
           />
         )}
 
@@ -77,9 +114,37 @@ function App() {
           <LawyerProfilePage onBack={() => navigateTo('lawyer-dashboard')} />
         )}
 
-        {/* Test Plain White Page */}
-        {currentView === 'plain-page' && (
-          <PlainPage onBack={() => navigateTo(previousDashboard || 'dashboard')} />
+        {/* Role-Specific Appointment Pages */}
+        {currentView === 'client-appointments' && (
+          <ClientAppointments onBack={() => navigateTo('client-dashboard')} />
+        )}
+        {currentView === 'lawyer-appointments' && (
+          <LawyerAppointments onBack={() => navigateTo('lawyer-dashboard')} />
+        )}
+        {currentView === 'lawfirm-appointments' && (
+          <LawfirmAppointments onBack={() => navigateTo('lawfirm-dashboard')} />
+        )}
+
+        {/* Job Posting Form (Only accessible to role: Lawfirm) */}
+        {currentView === 'job-posting-form' && (
+          <JobPostingForm
+            onBack={() => navigateTo('lawfirm-dashboard')}
+            userRole={userRole}
+            onSuccess={() => navigateTo('lawfirm-dashboard')}
+          />
+        )}
+
+        {/* Jobs Page for Lawyers */}
+        {currentView === 'jobs-page' && (
+          <JobsPage onBack={() => navigateTo('lawyer-dashboard')} />
+        )}
+
+        {/* BigPicture Details View (renamed from PlainPage) */}
+        {(currentView === 'big-picture' || currentView === 'plain-page') && (
+          <BigPicture
+            onBack={() => navigateTo(previousDashboard || 'dashboard')}
+            initialItem={selectedEntity}
+          />
         )}
       </main>
     </>
@@ -87,3 +152,4 @@ function App() {
 }
 
 export default App;
+

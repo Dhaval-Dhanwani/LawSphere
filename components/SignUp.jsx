@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import '../styles/forms.css';
 
-function SignUp({ onNavigate }) {
+function SignUp({ onNavigate, onRoleSet }) {
   const [selectedRole, setSelectedRole] = useState('Clients');
 
   const handleSubmit = (e) => {
@@ -14,6 +14,10 @@ function SignUp({ onNavigate }) {
 
     // Convert FormData into key-value object
     let data = Object.fromEntries(formdata.entries());
+
+    // Clean inputs
+    if (data.email) data.email = data.email.trim();
+    if (data.password) data.password = data.password.trim();
 
     // Add selected role
     data.role = selectedRole;
@@ -28,24 +32,33 @@ function SignUp({ onNavigate }) {
     )
     .then((response) => {
       console.log("Authentication successful:", response.data);
+      const activeRole = response.data.role || selectedRole;
+      localStorage.setItem('userRole', activeRole);
+      if (typeof onRoleSet === 'function') {
+        onRoleSet(activeRole);
+      }
 
-      // Direct based on selected role
-      if (selectedRole === 'Clients') {
+      // Direct based on authenticated role
+      const effectiveRole = activeRole.toLowerCase();
+      if (effectiveRole.includes('client')) {
         onNavigate('client-dashboard');
       } 
-      else if (selectedRole === 'Lawyer') {
-        onNavigate('lawyer-dashboard');
-      } 
-      else if (selectedRole === 'Lawfirm') {
+      else if (effectiveRole.includes('firm') || effectiveRole.includes('lawfirm')) {
         onNavigate('lawfirm-dashboard');
+      } 
+      else if (effectiveRole.includes('lawyer')) {
+        onNavigate('lawyer-dashboard');
+      } else {
+        onNavigate('dashboard');
       }
     })
     .catch((e) => {
       console.error('Authentication failed:', e);
-      const errorMsg = e.response?.data?.error || e.response?.data?.message || 'Authentication failed. Please check your email, password, and selected role.';
+      const errorMsg = e.response?.data?.error || e.response?.data?.message || (e.response ? 'Authentication failed. Please check your credentials.' : e.message);
       alert(errorMsg);
     });
   };
+
 
   return (
     <div className="form-container">

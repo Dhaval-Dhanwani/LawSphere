@@ -20,10 +20,12 @@ function LawfirmForm({ onBack, onSuccess }) {
       if(response.status==200 || response.status==201)
       {
         console.log("Successfully data added");
+        localStorage.setItem('userRole', 'Lawfirm');
         alert("Law Firm Registered Successfully!")
         event.target.reset();
         if (onSuccess) onSuccess();
       }
+
     }catch(error)
     {
       console.log("error: "+error);

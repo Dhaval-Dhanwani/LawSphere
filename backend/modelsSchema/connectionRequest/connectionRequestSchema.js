@@ -12,7 +12,7 @@ let connectionRequestSchema = mongo.Schema(
         },
         purpose: {
             type: String,
-            enum: ["Legal Service", "Professional Collaboration", "Case Referral", "Recruitment", "Other"],
+           // enum: ["Legal Service", "Professional Collaboration", "Case Referral", "Recruitment", "Other"]
             required: true
         },
         status: {

@@ -18,10 +18,12 @@ function LawyerForm({ onBack, onSuccess }) {
 
       if(respone.status==200 || respone.status==201)
       {
+        localStorage.setItem('userRole', 'Lawyer');
         alert("Lawyer Registered Successfully!");
         event.target.reset();
         if (onSuccess) onSuccess();
       }
+
     }catch(error)
     {
       console.log("error:"+error);

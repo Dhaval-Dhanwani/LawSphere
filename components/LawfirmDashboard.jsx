@@ -25,18 +25,35 @@ function LawfirmDashboard({ onNavigate }) {
 
   return (
     <div className="client-dashboard-container">
-      {/* Top action bar with Profile button */}
+      {/* Top action bar with MyAppointments, Post a Job & Profile buttons */}
       <div className="dashboard-top-bar">
         <span className="dashboard-portal-tag">Law Firm Portal</span>
-        <button
-          className="dashboard-profile-btn"
-          title="Profile"
-          aria-label="Profile"
-          onClick={() => onNavigate && onNavigate('lawfirm-profile')}
-        >
-          <img src={userAvatar} alt="Profile" className="dashboard-profile-img" />
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+          <button
+            className="dashboard-signout-btn"
+            style={{ borderColor: 'rgba(59, 130, 246, 0.4)', background: 'rgba(59, 130, 246, 0.18)', color: '#93c5fd' }}
+            onClick={() => onNavigate && onNavigate('lawfirm-appointments')}
+          >
+            &#128197; MyAppointments
+          </button>
+          <button
+            className="dashboard-signout-btn"
+            style={{ borderColor: 'rgba(249, 115, 22, 0.4)', background: 'rgba(249, 115, 22, 0.18)', color: '#fdba74' }}
+            onClick={() => onNavigate && onNavigate('job-posting-form')}
+          >
+            &#128221; Post a Job
+          </button>
+          <button
+            className="dashboard-profile-btn"
+            title="Profile"
+            aria-label="Profile"
+            onClick={() => onNavigate && onNavigate('lawfirm-profile')}
+          >
+            <img src={userAvatar} alt="Profile" className="dashboard-profile-img" />
+          </button>
+        </div>
       </div>
+
 
       <div className="dashboard-header-block">
         <h2>Explore Verified Lawyers</h2>
@@ -49,7 +66,7 @@ function LawfirmDashboard({ onNavigate }) {
             <div
               key={lawyer._id}
               className="list-item-card"
-              onClick={() => onNavigate('plain-page')}
+              onClick={() => onNavigate('plain-page', lawyer)}
             >
               <div className="item-top-row">
                 <h3 className="item-title">{lawyer.name}</h3>

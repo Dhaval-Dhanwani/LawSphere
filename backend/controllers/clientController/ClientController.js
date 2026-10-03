@@ -1,3 +1,4 @@
+import { AppointmentModel } from '../../modelsSchema/AppointmenstSchema/appointmentSchema.js';
 import { Client } from '../../modelsSchema/client/clientScehma.js';
 import { Lawfirm } from '../../modelsSchema/lawfirm/lawfirmSchema.js';
 import { Lawyer } from '../../modelsSchema/lawyer/lawyerSchema.js';
@@ -81,3 +82,93 @@ export async function updateProfile(req, res) {
         return res.status(500).json({ error: error.message || "Failed to update profile" });
     }
 }
+
+
+
+export async function MakeAppointment(req, res) {
+    try {
+        if (!req.session || !req.session.user || !req.session.user.id) {
+            return res.status(401).json({ error: "Unauthorized: Please log in as a client first" });
+        }
+
+        let { date, message, lawyerId, lawfirmId } = req.body;
+        let clientId = req.session.user.id;
+
+        if (!date || !message) {
+            return res.status(400).json({ error: "Preferred date and purpose/note are required" });
+        }
+
+        const appointmentDate = new Date(date);
+        const todayStart = new Date();
+        todayStart.setHours(0, 0, 0, 0);
+
+        if (isNaN(appointmentDate.getTime()) || appointmentDate < todayStart) {
+            return res.status(400).json({
+                error: "Please check and choose a future date. Appointments cannot be scheduled for past dates."
+            });
+        }
+
+        if (!lawyerId && !lawfirmId) {
+            return res.status(400).json({ error: "Practitioner ID (lawyer or law firm) is required" });
+        }
+
+
+        let resolvedLawfirmId = lawfirmId || null;
+
+        if (lawyerId) {
+            let lawyer = await Lawyer.findById(lawyerId);
+            if (!lawyer) {
+                return res.status(404).json({ error: "Lawyer not found" });
+            }
+            if (lawyer.lawfirmId) {
+                resolvedLawfirmId = lawyer.lawfirmId;
+            }
+        } else if (lawfirmId) {
+            let lawfirm = await Lawfirm.findById(lawfirmId);
+            if (!lawfirm) {
+                return res.status(404).json({ error: "Law firm not found" });
+            }
+        }
+
+        let newAppointment = new AppointmentModel({
+            clientId: clientId,
+            lawyerId: lawyerId || null,
+            lawfirmId: resolvedLawfirmId,
+            date: date,
+            message: message,
+            requestStatus: "Not Seen"
+        });
+
+        await newAppointment.save();
+        return res.status(201).json(newAppointment);
+
+    } catch (error) {
+        console.error("Error in MakeAppointment:", error);
+        return res.status(500).json({ error: error.message || "Server error while creating appointment" });
+    }
+}
+
+export let CancelAppointment = async (req, res) => {
+    try {
+        const { appointId } = req.body;
+
+        if (!appointId) {
+            return res.status(400).json({ error: "Appointment ID is required" });
+        }
+
+        let needtoCancel = await AppointmentModel.findById(appointId);
+
+        if (!needtoCancel) {
+            return res.status(404).json({ error: "Appointment not found" });
+        }
+
+        needtoCancel.requestStatus = "Cancelled";
+        await needtoCancel.save();
+
+        return res.status(200).json(needtoCancel);
+
+    } catch (error) {
+        console.error("Error in CancelAppointment:", error);
+        return res.status(500).json({ error: "Server Error Try after sometime" });
+    }
+};

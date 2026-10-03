@@ -1,6 +1,9 @@
 import { Lawyer } from "../../modelsSchema/lawyer/lawyerSchema.js";
 import { Lawfirm } from "../../modelsSchema/lawfirm/lawfirmSchema.js";
 import { setsession } from "../SignUpController/SignUp.js";
+import { AppointmentModel } from "../../modelsSchema/AppointmenstSchema/appointmentSchema.js";
+import { JobPosting } from "../../modelsSchema/jobPosting/jobPostingSchema.js";
+
 
 export function getLawyerRegister(req, res) {
     res.sendFile("D:/DDU/SEM5/MERN/LawSphere/LawSphere/backend/HTMLforms/lawyerForm.html");
@@ -78,3 +81,81 @@ export async function updateProfile(req, res) {
         return res.status(500).json({ error: error.message || "Failed to update profile" });
     }
 }
+
+// Accept and Reject the Request can be handled in one function
+export let UpdateAppointmentStatus = async (req, res) => {
+
+    try {
+
+        const { appointmentId, requestStatus } = req.body;
+
+        if (!appointmentId || !requestStatus) {
+
+            return res.status(400).json({
+                error: "Appointment ID and status are required"
+            });
+
+        }
+
+        if (
+            requestStatus !== "Accepted" &&
+            requestStatus !== "Rejected"
+        ) {
+
+            return res.status(400).json({
+                error: "Invalid appointment status"
+            });
+
+        }
+
+        
+        const appointment = await AppointmentModel.findById(
+            appointmentId
+        );
+
+        if (!appointment) {
+
+            return res.status(404).json({
+                error: "Appointment not found"
+            });
+
+        }
+
+        appointment.requestStatus = requestStatus;
+
+        await appointment.save();
+
+        return res.status(200).json(appointment);
+
+    }
+    catch (error) {
+
+        console.log(error);
+
+        return res.status(500).json({
+            error: "Server Error"
+        });
+
+    }
+
+};
+
+// List all active job postings for lawyers
+export async function listJobs(req, res) {
+    try {
+        // Automatically delete jobs whose scheduled date has passed
+        const todayStart = new Date();
+        todayStart.setHours(0, 0, 0, 0);
+        await JobPosting.deleteMany({ scheduledDate: { $lt: todayStart } });
+
+        const jobs = await JobPosting.find({ status: { $ne: "Closed" } })
+            .populate('lawfirmId', 'firmName contactEmail officeLocations practicesAreas website')
+            .sort({ createdAt: -1 })
+            .lean();
+
+        return res.status(200).json(jobs || []);
+    } catch (error) {
+        console.error("Error in listJobs for lawyer:", error);
+        return res.status(500).json({ error: "Failed to fetch job postings" });
+    }
+}

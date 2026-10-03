@@ -30,7 +30,12 @@ function Navbar({ onNavigate, currentView }) {
         currentView === 'lawyer-dashboard' ||
         currentView === 'client-profile' ||
         currentView === 'lawfirm-profile' ||
-        currentView === 'lawyer-profile';
+        currentView === 'lawyer-profile' ||
+        currentView === 'client-appointments' ||
+        currentView === 'lawyer-appointments' ||
+        currentView === 'lawfirm-appointments' ||
+        currentView === 'job-posting-form' ||
+        currentView === 'jobs-page';
 
     return (
         <div className={currstate === "dark" ? "darknavbox" : "lightnavbox"}>
@@ -67,6 +72,7 @@ function Navbar({ onNavigate, currentView }) {
                     <button
                         className="signout-nav-btn"
                         onClick={() => {
+                            localStorage.removeItem('userRole');
                             alert("You have been signed out.");
                             onNavigate && onNavigate('dashboard');
                         }}
@@ -74,6 +80,7 @@ function Navbar({ onNavigate, currentView }) {
                         Sign Out
                     </button>
                 )}
+
 
                 <button
                     className="theme-nav-btn"

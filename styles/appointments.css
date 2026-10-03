@@ -1,0 +1,441 @@
+/* Appointments Management Styles (Client & Lawyer) */
+
+.appointments-container {
+  width: 100%;
+  max-width: 950px;
+  margin: 30px auto 60px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.appointments-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  color: #ffffff;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+body.light-body .appointments-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #1e293b;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* Header Banner */
+.appointments-header-banner {
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.2) 0%, rgba(59, 130, 246, 0.2) 100%);
+  padding: 20px 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+body.light-body .appointments-header-banner {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(249, 115, 22, 0.08) 100%);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.appointments-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  padding: 9px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.appointments-back-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(-2px);
+}
+
+body.light-body .appointments-back-btn {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #334155;
+}
+
+body.light-body .appointments-back-btn:hover {
+  background: #f1f5f9;
+}
+
+.appointments-hero-info {
+  padding: 24px 30px 10px;
+}
+
+.appointments-hero-info h2 {
+  margin: 0 0 6px 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+body.light-body .appointments-hero-info h2 {
+  color: #0f172a;
+}
+
+.appointments-hero-info p {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+body.light-body .appointments-hero-info p {
+  color: #64748b;
+}
+
+/* Appointments List */
+.appointments-list {
+  padding: 20px 30px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.appointment-item-card {
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px 24px;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+body.light-body .appointment-item-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.appointment-item-card:hover {
+  border-color: rgba(249, 115, 22, 0.4);
+}
+
+body.light-body .appointment-item-card:hover {
+  border-color: #93c5fd;
+}
+
+.appointment-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.appointment-practitioner-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+body.light-body .appointment-practitioner-name {
+  color: #0f172a;
+}
+
+/* Status Badges */
+.apt-status-badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.apt-status-badge.pending {
+  background: rgba(234, 179, 8, 0.2);
+  color: #fde047;
+  border: 1px solid rgba(234, 179, 8, 0.4);
+}
+
+body.light-body .apt-status-badge.pending {
+  background: #fef9c3;
+  color: #a16207;
+  border-color: #fef08a;
+}
+
+.apt-status-badge.accepted {
+  background: rgba(34, 197, 94, 0.2);
+  color: #86efac;
+  border: 1px solid rgba(34, 197, 94, 0.4);
+}
+
+body.light-body .apt-status-badge.accepted {
+  background: #dcfce7;
+  color: #15803d;
+  border-color: #86efac;
+}
+
+.apt-status-badge.rejected {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+body.light-body .apt-status-badge.rejected {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-color: #fca5a5;
+}
+
+.apt-status-badge.cancelled {
+  background: rgba(148, 163, 184, 0.2);
+  color: #cbd5e1;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+body.light-body .apt-status-badge.cancelled {
+  background: #f1f5f9;
+  color: #64748b;
+  border-color: #cbd5e1;
+}
+
+/* Details Grid */
+.appointment-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  font-size: 13.5px;
+}
+
+@media (max-width: 600px) {
+  .appointment-meta-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.meta-field {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+body.light-body .meta-field {
+  color: #475569;
+}
+
+.meta-field strong {
+  color: #ffffff;
+  margin-right: 4px;
+}
+
+body.light-body .meta-field strong {
+  color: #0f172a;
+}
+
+.appointment-note-box {
+  background: rgba(0, 0, 0, 0.15);
+  border-left: 3px solid #f97316;
+  padding: 10px 14px;
+  border-radius: 4px;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.4;
+}
+
+body.light-body .appointment-note-box {
+  background: #eff6ff;
+  border-left-color: #2563eb;
+  color: #1e293b;
+}
+
+/* Card Actions */
+.appointment-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body.light-body .appointment-card-actions {
+  border-top: 1px solid #e2e8f0;
+}
+
+.apt-cancel-btn {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.apt-cancel-btn:hover:not(:disabled) {
+  background: #dc2626;
+  color: #ffffff;
+  border-color: #dc2626;
+}
+
+body.light-body .apt-cancel-btn {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #fca5a5;
+}
+
+body.light-body .apt-cancel-btn:hover:not(:disabled) {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.apt-cancel-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.apt-accept-btn {
+  background: #16a34a;
+  color: #ffffff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.apt-accept-btn:hover:not(:disabled) {
+  background: #15803d;
+}
+
+.apt-reject-btn {
+  background: #dc2626;
+  color: #ffffff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.apt-reject-btn:hover:not(:disabled) {
+  background: #b91c1c;
+}
+
+/* Empty State */
+.appointments-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+body.light-body .appointments-empty {
+  color: #64748b;
+}
+
+/* Confirm Modal */
+.confirm-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.confirm-modal-box {
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 440px;
+  padding: 24px;
+  box-sizing: border-box;
+  color: #ffffff;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+body.light-body .confirm-modal-box {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+}
+
+.confirm-modal-box h3 {
+  margin: 0 0 10px 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.confirm-modal-box p {
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 24px 0;
+  line-height: 1.5;
+}
+
+body.light-body .confirm-modal-box p {
+  color: #475569;
+}
+
+.confirm-modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.confirm-btn-yes {
+  background: #dc2626;
+  color: #ffffff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.confirm-btn-yes:hover {
+  background: #b91c1c;
+}
+
+.confirm-btn-no {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+body.light-body .confirm-btn-no {
+  border-color: #cbd5e1;
+  color: #475569;
+}
+
+body.light-body .confirm-btn-no:hover {
+  background: #f1f5f9;
+}

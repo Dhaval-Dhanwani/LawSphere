@@ -1,0 +1,418 @@
+/* PlainPage Styles - Database Attributes & Request Appointment */
+
+.plain-page-wrapper {
+  width: 100%;
+  max-width: 1000px;
+  margin: 30px auto 100px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.plain-details-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  color: #ffffff;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+body.light-body .plain-details-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #1e293b;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* Header Banner with Back button on Left */
+.plain-header-banner {
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.2) 0%, rgba(59, 130, 246, 0.2) 100%);
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+body.light-body .plain-header-banner {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(249, 115, 22, 0.08) 100%);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.plain-page-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  padding: 9px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  position: static !important;
+}
+
+.plain-page-back-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(-2px);
+}
+
+body.light-body .plain-page-back-btn {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #334155;
+}
+
+body.light-body .plain-page-back-btn:hover {
+  background: #f1f5f9;
+}
+
+/* Hero Section */
+.plain-hero-section {
+  padding: 24px 30px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+body.light-body .plain-hero-section {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.plain-hero-title h1 {
+  margin: 0 0 6px 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+body.light-body .plain-hero-title h1 {
+  color: #0f172a;
+}
+
+.plain-hero-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.role-badge {
+  background: #f97316;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+body.light-body .role-badge {
+  background: #2563eb;
+}
+
+.status-badge {
+  background: rgba(34, 197, 94, 0.2);
+  color: #86efac;
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 9999px;
+}
+
+body.light-body .status-badge {
+  background: #dcfce7;
+  color: #15803d;
+  border-color: #86efac;
+}
+
+/* Content Body */
+.plain-body-content {
+  padding: 24px 30px 36px;
+}
+
+.plain-section-header {
+  font-size: 16px;
+  font-weight: 700;
+  color: #f3f4f6;
+  margin: 20px 0 14px 0;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.plain-section-header:first-child {
+  margin-top: 0;
+}
+
+body.light-body .plain-section-header {
+  color: #0f172a;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Attributes Grid */
+.attributes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .attributes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.attribute-item {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+
+body.light-body .attribute-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.attribute-item.full-width {
+  grid-column: 1 / -1;
+}
+
+.attribute-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 4px;
+}
+
+body.light-body .attribute-label {
+  color: #64748b;
+}
+
+.attribute-value {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #ffffff;
+  word-break: break-word;
+}
+
+body.light-body .attribute-value {
+  color: #0f172a;
+}
+
+.attribute-value a {
+  color: #60a5fa;
+  text-decoration: none;
+}
+
+body.light-body .attribute-value a {
+  color: #2563eb;
+}
+
+.attribute-value a:hover {
+  text-decoration: underline;
+}
+
+/* Bottom Action Bar inside Card */
+.plain-card-footer {
+  padding: 16px 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: flex-end;
+}
+
+body.light-body .plain-card-footer {
+  border-top: 1px solid #f1f5f9;
+}
+
+/* Fixed Floating Action Button on Right Bottom Corner */
+.fixed-bottom-right-action {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 999;
+}
+
+.request-appoint-btn {
+  background: #f97316;
+  color: #ffffff;
+  border: none;
+  padding: 13px 26px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.45);
+}
+
+.request-appoint-btn:hover {
+  background: #ea580c;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(249, 115, 22, 0.6);
+}
+
+body.light-body .request-appoint-btn {
+  background: #2563eb;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+
+body.light-body .request-appoint-btn:hover {
+  background: #1d4ed8;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.55);
+}
+
+/* Appointment Modal */
+.appoint-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.appoint-modal-box {
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 500px;
+  padding: 24px;
+  box-sizing: border-box;
+  color: #ffffff;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+body.light-body .appoint-modal-box {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+}
+
+.appoint-modal-box h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.appoint-modal-box p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 18px 0;
+}
+
+body.light-body .appoint-modal-box p {
+  color: #64748b;
+}
+
+.appoint-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.appoint-form-group label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.appoint-form-group input,
+.appoint-form-group textarea,
+.appoint-form-group select {
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  font-size: 14px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+body.light-body .appoint-form-group input,
+body.light-body .appoint-form-group textarea,
+body.light-body .appoint-form-group select {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.appoint-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.appoint-cancel-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13.5px;
+  cursor: pointer;
+}
+
+body.light-body .appoint-cancel-btn {
+  border-color: #cbd5e1;
+  color: #475569;
+}
+
+.appoint-submit-btn {
+  background: #f97316;
+  border: none;
+  color: #ffffff;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+body.light-body .appoint-submit-btn {
+  background: #2563eb;
+}
+
+.empty-plain-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-plain-state h3 {
+  margin: 0 0 10px 0;
+  font-size: 20px;
+}
+
+.empty-plain-state p {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+}
+
+body.light-body .empty-plain-state p {
+  color: #64748b;
+}

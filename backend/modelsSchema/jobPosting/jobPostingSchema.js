@@ -2,6 +2,15 @@ import mongo from 'mongoose'
 
 let jobPostingSchema = mongo.Schema(
     {
+        lawfirmId: {
+            type: mongo.Schema.Types.ObjectId,
+            ref: "Lawfirm",
+            default: null
+        },
+        firmName: {
+            type: String,
+            default: ""
+        },
         jobTitle: {
             type: String,
             required: true
@@ -18,18 +27,23 @@ let jobPostingSchema = mongo.Schema(
             type: String,
             required: true
         },
-        jobType: {
+        jobType: {  
             type: String,
+            enum: ["Full-Time", "Part-Time", "Contract", "Internship", "Freelance"],
             required: true
         },
         description: {
             type: String,
             required: true
         },
+        scheduledDate: {
+            type: Date,
+            required: true
+        },
         status: {
             type: String,
             enum: ["Draft", "Active", "Closed"],
-            default: "Draft"
+            default: "Active"
         },
         createdAt: {
             type: Date,
@@ -38,6 +52,8 @@ let jobPostingSchema = mongo.Schema(
     }
 )
 
+
 let JobPosting = mongo.model("JobPosting", jobPostingSchema);
 
 export { JobPosting }
+

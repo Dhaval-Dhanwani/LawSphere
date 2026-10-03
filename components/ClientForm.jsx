@@ -20,10 +20,12 @@ function ClientForm({ onBack, onSuccess }) {
       
       if (response.status === 200 || response.status === 201) {
         console.log("Success:", response.data);
+        localStorage.setItem('userRole', 'Clients');
         alert("Client registered successfully!");
         event.target.reset(); // clear form
         if (onSuccess) onSuccess(); // Route to the dashboard
       } else {
+
         console.error("Error from server:", response.data);
         alert("Failed to register: " + (response.data.error || "Unknown error"));
       }
